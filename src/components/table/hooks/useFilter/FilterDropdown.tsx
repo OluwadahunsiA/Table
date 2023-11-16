@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import * as React from 'react';
 import FilterFilled from '@ant-design/icons/FilterFilled';
 import classNames from 'classnames';
@@ -6,7 +7,7 @@ import isEqual from 'rc-util/lib/isEqual';
 
 import type { FilterState } from '.';
 import useSyncState from '../../../_util/hooks/useSyncState';
-import { devUseWarning } from '../../../_util/warning';
+// import { devUseWarning } from '../../../_util/warning';
 import Button from '../../../button';
 import type { CheckboxChangeEvent } from '../../../checkbox';
 import Checkbox from '../../../checkbox';
@@ -32,11 +33,14 @@ import type {
 import FilterSearch from './FilterSearch';
 import FilterDropdownMenuWrapper from './FilterWrapper';
 
-type FilterTreeDataNode = FieldDataNode<{ title: React.ReactNode; key: string }>;
+type FilterTreeDataNode = FieldDataNode<{
+  title: React.ReactNode;
+  key: string;
+}>;
 
 interface FilterRestProps {
-  confirm?: Boolean;
-  closeDropdown?: Boolean;
+  confirm?: boolean;
+  closeDropdown?: boolean;
 }
 
 export function flattenKeys(filters?: ColumnFilterItem[]) {
@@ -56,7 +60,10 @@ function hasSubMenu(filters: ColumnFilterItem[]) {
 
 function searchValueMatched(searchValue: string, text: React.ReactNode) {
   if (typeof text === 'string' || typeof text === 'number') {
-    return text?.toString().toLowerCase().includes(searchValue.trim().toLowerCase());
+    return text
+      ?.toString()
+      .toLowerCase()
+      .includes(searchValue.trim().toLowerCase());
   }
   return false;
 }
@@ -178,31 +185,31 @@ function FilterDropdown<RecordType>(props: FilterDropdownProps<RecordType>) {
     onFilterDropdownVisibleChange?.(newVisible);
   };
 
-  if (process.env.NODE_ENV !== 'production') {
-    const warning = devUseWarning('Table');
+  // if (process.env.NODE_ENV !== 'production') {
+  //   const warning = devUseWarning('Table');
 
-    [
-      ['filterDropdownVisible', 'filterDropdownOpen', filterDropdownVisible],
-      [
-        'onFilterDropdownVisibleChange',
-        'onFilterDropdownOpenChange',
-        onFilterDropdownVisibleChange,
-      ],
-    ].forEach(([deprecatedName, newName, prop]) => {
-      warning.deprecated(
-        prop === undefined || prop === null,
-        deprecatedName as string,
-        newName as string,
-      );
-    });
-  }
+  //   [
+  //     ['filterDropdownVisible', 'filterDropdownOpen', filterDropdownVisible],
+  //     [
+  //       'onFilterDropdownVisibleChange',
+  //       'onFilterDropdownOpenChange',
+  //       onFilterDropdownVisibleChange,
+  //     ],
+  //   ].forEach(([deprecatedName, newName, prop]) => {
+  //     warning.deprecated(
+  //       prop === undefined || prop === null,
+  //       deprecatedName as string,
+  //       newName as string,
+  //     );
+  //   });
+  // }
 
   const mergedVisible = filterDropdownOpen ?? filterDropdownVisible ?? visible;
 
   // ===================== Select Keys =====================
   const propFilteredKeys = filterState?.filteredKeys;
   const [getFilteredKeysSync, setFilteredKeysSync] = useSyncState(
-    wrapStringListType(propFilteredKeys),
+    wrapStringListType(propFilteredKeys)
   );
 
   const onSelectKeys = ({ selectedKeys }: { selectedKeys: string[] }) => {
@@ -211,7 +218,10 @@ function FilterDropdown<RecordType>(props: FilterDropdownProps<RecordType>) {
 
   const onCheck = (
     keys: string[],
-    { node, checked }: { node: EventDataNode<FilterTreeDataNode>; checked: boolean },
+    {
+      node,
+      checked,
+    }: { node: EventDataNode<FilterTreeDataNode>; checked: boolean }
   ) => {
     if (!filterMultiple) {
       onSelectKeys({ selectedKeys: checked && node.key ? [node.key] : [] });
@@ -270,7 +280,10 @@ function FilterDropdown<RecordType>(props: FilterDropdownProps<RecordType>) {
   };
 
   const onReset = (
-    { confirm, closeDropdown }: FilterRestProps = { confirm: false, closeDropdown: false },
+    { confirm, closeDropdown }: FilterRestProps = {
+      confirm: false,
+      closeDropdown: false,
+    }
   ) => {
     if (confirm) {
       internalTriggerFilter([]);
@@ -282,7 +295,9 @@ function FilterDropdown<RecordType>(props: FilterDropdownProps<RecordType>) {
     setSearchValue('');
 
     if (filterResetToDefaultFilteredValue) {
-      setFilteredKeysSync((defaultFilteredValue || []).map((key) => String(key)));
+      setFilteredKeysSync(
+        (defaultFilteredValue || []).map((key) => String(key))
+      );
     } else {
       setFilteredKeysSync([]);
     }
@@ -313,12 +328,16 @@ function FilterDropdown<RecordType>(props: FilterDropdownProps<RecordType>) {
 
   // ======================== Style ========================
   const dropdownMenuClass = classNames({
-    [`${dropdownPrefixCls}-menu-without-submenu`]: !hasSubMenu(column.filters || []),
+    [`${dropdownPrefixCls}-menu-without-submenu`]: !hasSubMenu(
+      column.filters || []
+    ),
   });
 
   const onCheckAll = (e: CheckboxChangeEvent) => {
     if (e.target.checked) {
-      const allFilterKeys = flattenKeys(column?.filters).map((key) => String(key));
+      const allFilterKeys = flattenKeys(column?.filters).map((key) =>
+        String(key)
+      );
       setFilteredKeysSync(allFilterKeys);
     } else {
       setFilteredKeysSync([]);
@@ -349,7 +368,8 @@ function FilterDropdown<RecordType>(props: FilterDropdownProps<RecordType>) {
   if (typeof column.filterDropdown === 'function') {
     dropdownContent = column.filterDropdown({
       prefixCls: `${dropdownPrefixCls}-custom`,
-      setSelectedKeys: (selectedKeys: string[]) => onSelectKeys({ selectedKeys }),
+      setSelectedKeys: (selectedKeys: string[]) =>
+        onSelectKeys({ selectedKeys }),
       selectedKeys: getFilteredKeysSync(),
       confirm: doFilter,
       clearFilters: onReset,
@@ -392,7 +412,9 @@ function FilterDropdown<RecordType>(props: FilterDropdownProps<RecordType>) {
             <div className={`${tablePrefixCls}-filter-dropdown-tree`}>
               {filterMultiple ? (
                 <Checkbox
-                  checked={selectedKeys.length === flattenKeys(column.filters).length}
+                  checked={
+                    selectedKeys.length === flattenKeys(column.filters).length
+                  }
                   indeterminate={
                     selectedKeys.length > 0 &&
                     selectedKeys.length < flattenKeys(column.filters).length
@@ -410,6 +432,7 @@ function FilterDropdown<RecordType>(props: FilterDropdownProps<RecordType>) {
                 multiple={filterMultiple}
                 checkStrictly={!filterMultiple}
                 className={`${dropdownPrefixCls}-menu`}
+                //@ts-expect-error
                 onCheck={onCheck}
                 checkedKeys={selectedKeys}
                 selectedKeys={selectedKeys}
@@ -470,7 +493,7 @@ function FilterDropdown<RecordType>(props: FilterDropdownProps<RecordType>) {
         return isEqual(
           (defaultFilteredValue || []).map((key) => String(key)),
           selectedKeys,
-          true,
+          true
         );
       }
 
@@ -481,10 +504,15 @@ function FilterDropdown<RecordType>(props: FilterDropdownProps<RecordType>) {
       <>
         {getFilterComponent()}
         <div className={`${prefixCls}-dropdown-btns`}>
-          <Button type="link" size="small" disabled={getResetDisabled()} onClick={() => onReset()}>
+          <Button
+            type='link'
+            size='small'
+            disabled={getResetDisabled()}
+            onClick={() => onReset()}
+          >
             {locale.filterReset}
           </Button>
-          <Button type="primary" size="small" onClick={onConfirm}>
+          <Button type='primary' size='small' onClick={onConfirm}>
             {locale.filterConfirm}
           </Button>
         </div>
@@ -494,7 +522,11 @@ function FilterDropdown<RecordType>(props: FilterDropdownProps<RecordType>) {
 
   // We should not block customize Menu with additional props
   if (column.filterDropdown) {
-    dropdownContent = <OverrideProvider selectable={undefined}>{dropdownContent}</OverrideProvider>;
+    dropdownContent = (
+      <OverrideProvider selectable={undefined}>
+        {dropdownContent}
+      </OverrideProvider>
+    );
   }
 
   const menu = () => (
@@ -526,7 +558,7 @@ function FilterDropdown<RecordType>(props: FilterDropdownProps<RecordType>) {
         placement={direction === 'rtl' ? 'bottomLeft' : 'bottomRight'}
       >
         <span
-          role="button"
+          role='button'
           tabIndex={-1}
           className={classNames(`${prefixCls}-trigger`, {
             active: filtered,

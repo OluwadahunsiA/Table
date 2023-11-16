@@ -26,8 +26,8 @@ const FilterDropdownMenuWrapper = React.forwardRef<HTMLDivElement, FilterDropdow
   ),
 );
 
-if (process.env.NODE_ENV !== 'production') {
-  FilterDropdownMenuWrapper.displayName = 'FilterDropdownMenuWrapper';
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   FilterDropdownMenuWrapper.displayName = 'FilterDropdownMenuWrapper';
+// }
 
 export default FilterDropdownMenuWrapper;

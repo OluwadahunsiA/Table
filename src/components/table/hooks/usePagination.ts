@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import type { PaginationProps } from '../../pagination';
 import extendsObject from '../../_util/extendsObject';

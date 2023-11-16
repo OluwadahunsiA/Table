@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import CaretDownOutlined from '@ant-design/icons/CaretDownOutlined';
 import CaretUpOutlined from '@ant-design/icons/CaretUpOutlined';
 import classNames from 'classnames';

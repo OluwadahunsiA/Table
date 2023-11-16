@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import { useCallback, useMemo } from 'react';
 import DownOutlined from '@ant-design/icons/DownOutlined';

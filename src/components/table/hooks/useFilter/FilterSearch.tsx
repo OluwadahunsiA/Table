@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import SearchOutlined from '@ant-design/icons/SearchOutlined';
 import * as React from 'react';
 import Input from '../../../input';

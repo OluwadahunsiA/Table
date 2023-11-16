@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type * as React from 'react';
 import type { Reference } from 'rc-table';
 import type {
@@ -96,7 +97,8 @@ export interface FilterConfirmProps {
 
 export interface FilterDropdownProps {
   prefixCls: string;
-  setSelectedKeys: (selectedKeys: React.Key[]) => void;
+  // setSelectedKeys: (selectedKeys: React.Key[]) => void;
+  setSelectedKeys:any,
   selectedKeys: React.Key[];
   /**
    * Confirm filter value, if you want to close dropdown before commit, you can call with
