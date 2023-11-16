@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { Component } from 'react';
 import React from 'react';
 import HolderOutlined from '@ant-design/icons/HolderOutlined';
@@ -13,8 +15,12 @@ import useStyle from './style';
 import dropIndicatorRender from './utils/dropIndicator';
 import SwitcherIconCom from './utils/iconUtil';
 
-export type SwitcherIcon = React.ReactNode | ((props: AntTreeNodeProps) => React.ReactNode);
-export type TreeLeafIcon = React.ReactNode | ((props: AntTreeNodeProps) => React.ReactNode);
+export type SwitcherIcon =
+  | React.ReactNode
+  | ((props: AntTreeNodeProps) => React.ReactNode);
+export type TreeLeafIcon =
+  | React.ReactNode
+  | ((props: AntTreeNodeProps) => React.ReactNode);
 
 export interface AntdTreeNodeAttribute {
   eventKey: string;
@@ -50,7 +56,9 @@ export interface AntTreeNodeProps {
   loading?: boolean;
   selected?: boolean;
   selectable?: boolean;
-  icon?: ((treeNode: AntdTreeNodeAttribute) => React.ReactNode) | React.ReactNode;
+  icon?:
+    | ((treeNode: AntdTreeNodeAttribute) => React.ReactNode)
+    | React.ReactNode;
   children?: React.ReactNode;
   [customProp: string]: any;
 }
@@ -109,7 +117,12 @@ interface DraggableConfig {
 export interface TreeProps<T extends BasicDataNode = DataNode>
   extends Omit<
     RcTreeProps<T>,
-    'prefixCls' | 'showLine' | 'direction' | 'draggable' | 'icon' | 'switcherIcon'
+    | 'prefixCls'
+    | 'showLine'
+    | 'direction'
+    | 'draggable'
+    | 'icon'
+    | 'switcherIcon'
   > {
   showLine?: boolean | { showLeafIcon: boolean | TreeLeafIcon };
   className?: string;
@@ -158,7 +171,8 @@ export interface TreeProps<T extends BasicDataNode = DataNode>
 }
 
 const Tree = React.forwardRef<RcTree, TreeProps>((props, ref) => {
-  const { getPrefixCls, direction, virtual, tree } = React.useContext(ConfigContext);
+  const { getPrefixCls, direction, virtual, tree } =
+    React.useContext(ConfigContext);
   const {
     prefixCls: customizePrefixCls,
     className,
@@ -220,9 +234,10 @@ const Tree = React.forwardRef<RcTree, TreeProps>((props, ref) => {
     return mergedDraggable;
   }, [draggable]);
 
-  const renderSwitcherIcon = (nodeProps: AntTreeNodeProps) => (
+  const renderSwitcherIcon: any = (nodeProps: AntTreeNodeProps) => (
     <SwitcherIconCom
       prefixCls={prefixCls}
+      //@ts-expect-error
       switcherIcon={switcherIcon}
       treeNodeProps={nodeProps}
       showLine={showLine}
@@ -230,6 +245,7 @@ const Tree = React.forwardRef<RcTree, TreeProps>((props, ref) => {
   );
 
   return wrapSSR(
+    //@ts-expect-error
     <RcTree
       itemHeight={20}
       ref={ref}
@@ -247,21 +263,27 @@ const Tree = React.forwardRef<RcTree, TreeProps>((props, ref) => {
         },
         tree?.className,
         className,
-        hashId,
+        hashId
       )}
       direction={direction}
-      checkable={checkable ? <span className={`${prefixCls}-checkbox-inner`} /> : checkable}
+      checkable={
+        checkable ? (
+          <span className={`${prefixCls}-checkbox-inner`} />
+        ) : (
+          checkable
+        )
+      }
       selectable={selectable}
       switcherIcon={renderSwitcherIcon}
       draggable={draggableConfig}
     >
       {children}
-    </RcTree>,
+    </RcTree>
   );
 });
 
-if (process.env.NODE_ENV !== 'production') {
-  Tree.displayName = 'Tree';
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   Tree.displayName = 'Tree';
+// }
 
 export default Tree;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import FileOutlined from '@ant-design/icons/FileOutlined';
 import FolderOpenOutlined from '@ant-design/icons/FolderOpenOutlined';
@@ -207,8 +208,8 @@ const ForwardDirectoryTree = React.forwardRef(
   DirectoryTree,
 ) as unknown as DirectoryTreeCompoundedComponent;
 
-if (process.env.NODE_ENV !== 'production') {
-  ForwardDirectoryTree.displayName = 'DirectoryTree';
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   ForwardDirectoryTree.displayName = 'DirectoryTree';
+// }
 
 export default ForwardDirectoryTree;

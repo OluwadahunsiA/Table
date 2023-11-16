@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 declare const CSSINJS_STATISTIC: any;
 
-const enableStatistic =
-  process.env.NODE_ENV !== 'production' || typeof CSSINJS_STATISTIC !== 'undefined';
+const enableStatistic = typeof CSSINJS_STATISTIC !== 'undefined';
+  // process.env.NODE_ENV !== 'production' || typeof CSSINJS_STATISTIC !== 'undefined';
 let recording = true;
 
 /**

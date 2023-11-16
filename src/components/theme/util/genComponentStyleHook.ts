@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 /* eslint-disable no-redeclare */
 import { useContext, type ComponentType } from 'react';
 import type { CSSInterpolation } from '@ant-design/cssinjs';
@@ -18,8 +20,8 @@ import useResetIconStyle from './useResetIconStyle';
 
 export type OverrideTokenWithoutDerivative = ComponentTokenMap;
 export type OverrideComponent = keyof OverrideTokenWithoutDerivative;
-export type GlobalTokenWithComponent<ComponentName extends OverrideComponent> = GlobalToken &
-  ComponentTokenMap[ComponentName];
+export type GlobalTokenWithComponent<ComponentName extends OverrideComponent> =
+  GlobalToken & ComponentTokenMap[ComponentName];
 
 type ComponentToken<ComponentName extends OverrideComponent> = Exclude<
   OverrideToken[ComponentName],
@@ -46,16 +48,17 @@ export type TokenWithCommonCls<T> = T & {
   /** Wrap ant prefixCls class with `.` prefix */
   antCls: string;
 };
-export type FullToken<ComponentName extends OverrideComponent> = TokenWithCommonCls<
-  GlobalTokenWithComponent<ComponentName>
->;
+export type FullToken<ComponentName extends OverrideComponent> =
+  TokenWithCommonCls<GlobalTokenWithComponent<ComponentName>>;
 
 export type GenStyleFn<ComponentName extends OverrideComponent> = (
   token: FullToken<ComponentName>,
-  info: StyleInfo<ComponentName>,
+  info: StyleInfo<ComponentName>
 ) => CSSInterpolation;
 
-export default function genComponentStyleHook<ComponentName extends OverrideComponent>(
+export default function genComponentStyleHook<
+  ComponentName extends OverrideComponent
+>(
   componentName: ComponentName | [ComponentName, string],
   styleFn: GenStyleFn<ComponentName>,
   getDefaultToken?:
@@ -65,7 +68,10 @@ export default function genComponentStyleHook<ComponentName extends OverrideComp
   options: {
     resetStyle?: boolean;
     // Deprecated token key map [["oldTokenKey", "newTokenKey"], ["oldTokenKey", "newTokenKey"]]
-    deprecatedTokens?: [ComponentTokenKey<ComponentName>, ComponentTokenKey<ComponentName>][];
+    deprecatedTokens?: [
+      ComponentTokenKey<ComponentName>,
+      ComponentTokenKey<ComponentName>
+    ][];
     /**
      * Only use component style in client side. Ignore in SSR.
      */
@@ -74,12 +80,13 @@ export default function genComponentStyleHook<ComponentName extends OverrideComp
      * Set order of component style. Default is -999.
      */
     order?: number;
-  } = {},
+  } = {}
 ) {
-  const cells = (Array.isArray(componentName) ? componentName : [componentName, componentName]) as [
-    ComponentName,
-    string,
-  ];
+  const cells = (
+    Array.isArray(componentName)
+      ? componentName
+      : [componentName, componentName]
+  ) as [ComponentName, string];
 
   const [component] = cells;
   const concatComponent = cells.join('-');
@@ -109,43 +116,56 @@ export default function genComponentStyleHook<ComponentName extends OverrideComp
           // Link
           '&': genLinkStyle(token),
         },
-      ],
+      ]
     );
 
     // Generate style for icons
     useResetIconStyle(iconPrefixCls, csp);
 
     return [
+      //@ts-expect-error
       useStyleRegister(
         { ...sharedConfig, path: [concatComponent, prefixCls, iconPrefixCls] },
         () => {
           const { token: proxyToken, flush } = statisticToken(token);
 
-          const customComponentToken = { ...(token[component] as ComponentToken<ComponentName>) };
+          const customComponentToken = {
+            ...(token[component] as ComponentToken<ComponentName>),
+          };
           if (options.deprecatedTokens) {
             const { deprecatedTokens } = options;
             deprecatedTokens.forEach(([oldTokenKey, newTokenKey]) => {
-              if (process.env.NODE_ENV !== 'production') {
-                warning(
-                  !customComponentToken?.[oldTokenKey],
-                  `The token '${String(oldTokenKey)}' of ${component} had deprecated, use '${String(
-                    newTokenKey,
-                  )}' instead.`,
-                );
-              }
+              // if (process.env.NODE_ENV !== 'production') {
+              //   warning(
+              //     !customComponentToken?.[oldTokenKey],
+              //     `The token '${String(oldTokenKey)}' of ${component} had deprecated, use '${String(
+              //       newTokenKey,
+              //     )}' instead.`,
+              //   );
+              // }
 
               // Should wrap with `if` clause, or there will be `undefined` in object.
-              if (customComponentToken?.[oldTokenKey] || customComponentToken?.[newTokenKey]) {
-                customComponentToken[newTokenKey] ??= customComponentToken?.[oldTokenKey];
+              if (
+                customComponentToken?.[oldTokenKey] ||
+                customComponentToken?.[newTokenKey]
+              ) {
+                customComponentToken[newTokenKey] ??=
+                  customComponentToken?.[oldTokenKey];
               }
             });
           }
           const defaultComponentToken =
             typeof getDefaultToken === 'function'
-              ? getDefaultToken(mergeToken(proxyToken, customComponentToken ?? {}))
+              ? //@ts-expect-error
+                getDefaultToken(
+                  mergeToken(proxyToken, customComponentToken ?? {})
+                )
               : getDefaultToken;
 
-          const mergedComponentToken = { ...defaultComponentToken, ...customComponentToken };
+          const mergedComponentToken = {
+            ...defaultComponentToken,
+            ...customComponentToken,
+          };
 
           const componentCls = `.${prefixCls}`;
           const mergedToken = mergeToken<
@@ -158,22 +178,27 @@ export default function genComponentStyleHook<ComponentName extends OverrideComp
               iconCls: `.${iconPrefixCls}`,
               antCls: `.${rootPrefixCls}`,
             },
-            mergedComponentToken,
+            mergedComponentToken
           );
 
-          const styleInterpolation = styleFn(mergedToken as unknown as FullToken<ComponentName>, {
-            hashId,
-            prefixCls,
-            rootPrefixCls,
-            iconPrefixCls,
-            overrideComponentToken: customComponentToken as any,
-          });
+          const styleInterpolation = styleFn(
+            mergedToken as unknown as FullToken<ComponentName>,
+            {
+              hashId,
+              prefixCls,
+              rootPrefixCls,
+              iconPrefixCls,
+              overrideComponentToken: customComponentToken as any,
+            }
+          );
           flush(component, mergedComponentToken);
           return [
-            options.resetStyle === false ? null : genCommonStyle(mergedToken, prefixCls),
+            options.resetStyle === false
+              ? null
+              : genCommonStyle(mergedToken, prefixCls),
             styleInterpolation,
           ];
-        },
+        }
       ),
       hashId,
     ];
@@ -185,19 +210,33 @@ export interface SubStyleComponentProps {
 }
 
 // Get from second argument
-type RestParameters<T extends any[]> = T extends [any, ...infer Rest] ? Rest : never;
+type RestParameters<T extends any[]> = T extends [any, ...infer Rest]
+  ? Rest
+  : never;
 
 export const genSubStyleComponent: <ComponentName extends OverrideComponent>(
   componentName: [ComponentName, string],
-  ...args: RestParameters<Parameters<typeof genComponentStyleHook<ComponentName>>>
-) => ComponentType<SubStyleComponentProps> = (componentName, styleFn, getDefaultToken, options) => {
-  const useStyle = genComponentStyleHook(componentName, styleFn, getDefaultToken, {
-    resetStyle: false,
+  ...args: RestParameters<
+    Parameters<typeof genComponentStyleHook<ComponentName>>
+  >
+) => ComponentType<SubStyleComponentProps> = (
+  componentName,
+  styleFn,
+  getDefaultToken,
+  options
+) => {
+  const useStyle = genComponentStyleHook(
+    componentName,
+    styleFn,
+    getDefaultToken,
+    {
+      resetStyle: false,
 
-    // Sub Style should default after root one
-    order: -998,
-    ...options,
-  });
+      // Sub Style should default after root one
+      order: -998,
+      ...options,
+    }
+  );
 
   const StyledComponent: ComponentType<SubStyleComponentProps> = ({
     prefixCls,
@@ -206,11 +245,11 @@ export const genSubStyleComponent: <ComponentName extends OverrideComponent>(
     return null;
   };
 
-  if (process.env.NODE_ENV !== 'production') {
-    StyledComponent.displayName = `SubStyle_${
-      Array.isArray(componentName) ? componentName.join('.') : componentName
-    }`;
-  }
+  // if (process.env.NODE_ENV !== 'production') {
+  //   StyledComponent.displayName = `SubStyle_${
+  //     Array.isArray(componentName) ? componentName.join('.') : componentName
+  //   }`;
+  // }
 
   return StyledComponent;
 };

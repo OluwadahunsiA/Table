@@ -29,7 +29,6 @@ function traverseNodesKey(
   treeData.forEach(processNode);
 }
 
-/** 计算选中范围，只考虑expanded情况以优化性能 */
 export function calcRangeKeys({
   treeData,
   expandedKeys,

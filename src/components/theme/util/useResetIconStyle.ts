@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import { useStyleRegister } from '@ant-design/cssinjs';
 import { resetIcon } from '../../style';
 import type { CSPConfig } from '../../config-provider';

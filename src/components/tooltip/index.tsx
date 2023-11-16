@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import type { BuildInPlacements } from '@rc-component/trigger';
 import classNames from 'classnames';
@@ -171,29 +172,29 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
   }));
 
   // ============================== Warn ==============================
-  if (process.env.NODE_ENV !== 'production') {
-    [
-      ['visible', 'open'],
-      ['defaultVisible', 'defaultOpen'],
-      ['onVisibleChange', 'onOpenChange'],
-      ['afterVisibleChange', 'afterOpenChange'],
-      ['arrowPointAtCenter', 'arrow={{ pointAtCenter: true }}'],
-    ].forEach(([deprecatedName, newName]) => {
-      warning.deprecated(!(deprecatedName in props), deprecatedName, newName);
-    });
+  // if (process.env.NODE_ENV !== 'production') {
+  //   [
+  //     ['visible', 'open'],
+  //     ['defaultVisible', 'defaultOpen'],
+  //     ['onVisibleChange', 'onOpenChange'],
+  //     ['afterVisibleChange', 'afterOpenChange'],
+  //     ['arrowPointAtCenter', 'arrow={{ pointAtCenter: true }}'],
+  //   ].forEach(([deprecatedName, newName]) => {
+  //     warning.deprecated(!(deprecatedName in props), deprecatedName, newName);
+  //   });
 
-    warning(
-      !destroyTooltipOnHide || typeof destroyTooltipOnHide === 'boolean',
-      'usage',
-      '`destroyTooltipOnHide` no need config `keepParent` anymore. Please use `boolean` value directly.',
-    );
+  //   warning(
+  //     !destroyTooltipOnHide || typeof destroyTooltipOnHide === 'boolean',
+  //     'usage',
+  //     '`destroyTooltipOnHide` no need config `keepParent` anymore. Please use `boolean` value directly.',
+  //   );
 
-    warning(
-      !arrow || typeof arrow === 'boolean' || !('arrowPointAtCenter' in arrow),
-      'deprecated',
-      '`arrowPointAtCenter` in `arrow` is deprecated. Please use `pointAtCenter` instead.',
-    );
-  }
+  //   warning(
+  //     !arrow || typeof arrow === 'boolean' || !('arrowPointAtCenter' in arrow),
+  //     'deprecated',
+  //     '`arrowPointAtCenter` in `arrow` is deprecated. Please use `pointAtCenter` instead.',
+  //   );
+  // }
 
   // ============================== Open ==============================
   const [open, setOpen] = useMergedState(false, {
@@ -334,9 +335,9 @@ const Tooltip = React.forwardRef<TooltipRef, TooltipProps>((props, ref) => {
   _InternalPanelDoNotUseOrYouWillBeFired: typeof PurePanel;
 };
 
-if (process.env.NODE_ENV !== 'production') {
-  Tooltip.displayName = 'Tooltip';
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   Tooltip.displayName = 'Tooltip';
+// }
 
 Tooltip._InternalPanelDoNotUseOrYouWillBeFired = PurePanel;
 
