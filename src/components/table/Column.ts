@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import type { ColumnType } from './interface';
 
 export interface ColumnProps<RecordType> extends ColumnType<RecordType> {
