@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { genTable } from 'rc-table';
 import type { InternalTableProps } from '../InternalTable';
 
