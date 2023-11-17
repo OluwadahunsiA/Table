@@ -44,8 +44,8 @@ ForwardTable.Column = Column;
 ForwardTable.ColumnGroup = ColumnGroup;
 ForwardTable.Summary = Summary;
 
-// if (process.env.NODE_ENV !== 'production') {
-//   ForwardTable.displayName = 'Table';
-// }
+if (process.env.NODE_ENV !== 'production') {
+  ForwardTable.displayName = 'Table';
+}
 
 export default ForwardTable;

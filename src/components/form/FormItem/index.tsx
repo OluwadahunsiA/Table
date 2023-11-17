@@ -132,9 +132,9 @@ function InternalFormItem<Values = any>(props: FormItemProps<Values>): React.Rea
   // ========================= Warn =========================
   const warning = devUseWarning('Form.Item');
 
-  // if (process.env.NODE_ENV !== 'production') {
-  //   warning(name !== null, 'usage', '`null` is passed as `name` property');
-  // }
+  if (process.env.NODE_ENV !== 'production') {
+    warning(name !== null, 'usage', '`null` is passed as `name` property');
+  }
 
   // ========================= MISC =========================
   // Get `noStyle` required info

@@ -140,9 +140,9 @@ const Space = React.forwardRef<HTMLDivElement, SpaceProps>((props, ref) => {
   );
 });
 
-// if (process.env.NODE_ENV !== 'production') {
-//   Space.displayName = 'Space';
-// }
+if (process.env.NODE_ENV !== 'production') {
+  Space.displayName = 'Space';
+}
 
 type CompoundedComponent = React.ForwardRefExoticComponent<
   SpaceProps & React.RefAttributes<HTMLDivElement>

@@ -208,8 +208,8 @@ const ForwardDirectoryTree = React.forwardRef(
   DirectoryTree,
 ) as unknown as DirectoryTreeCompoundedComponent;
 
-// if (process.env.NODE_ENV !== 'production') {
-//   ForwardDirectoryTree.displayName = 'DirectoryTree';
-// }
+if (process.env.NODE_ENV !== 'production') {
+  ForwardDirectoryTree.displayName = 'DirectoryTree';
+}
 
 export default ForwardDirectoryTree;

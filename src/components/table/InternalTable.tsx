@@ -162,13 +162,13 @@ const InternalTable = <RecordType extends AnyObject = AnyObject>(
 
   const warning = devUseWarning('Table');
 
-  // if (process.env.NODE_ENV !== 'production') {
-  //   warning(
-  //     !(typeof rowKey === 'function' && rowKey.length > 1),
-  //     'usage',
-  //     '`index` parameter of `rowKey` function is deprecated. There is no guarantee that it will work as expected.',
-  //   );
-  // }
+  if (process.env.NODE_ENV !== 'production') {
+    warning(
+      !(typeof rowKey === 'function' && rowKey.length > 1),
+      'usage',
+      '`index` parameter of `rowKey` function is deprecated. There is no guarantee that it will work as expected.',
+    );
+  }
 
   const baseColumns = React.useMemo(
     () =>

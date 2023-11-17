@@ -37,8 +37,8 @@ const Simple: React.FC = () => {
   );
 };
 
-// if (process.env.NODE_ENV !== 'production') {
-//   Simple.displayName = 'SimpleImage';
-// }
+if (process.env.NODE_ENV !== 'production') {
+  Simple.displayName = 'SimpleImage';
+}
 
 export default Simple;

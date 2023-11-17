@@ -30,9 +30,9 @@ function generator({ suffixCls, tagName, displayName }: GeneratorProps) {
     const Adapter = React.forwardRef<HTMLElement, BasicProps>((props, ref) => (
       <BasicComponent ref={ref} suffixCls={suffixCls} tagName={tagName} {...props} />
     ));
-    // if (process.env.NODE_ENV !== 'production') {
-    //   Adapter.displayName = displayName;
-    // }
+    if (process.env.NODE_ENV !== 'production') {
+      Adapter.displayName = displayName;
+    }
     return Adapter;
   };
 }

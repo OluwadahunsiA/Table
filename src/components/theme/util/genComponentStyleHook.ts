@@ -135,14 +135,14 @@ export default function genComponentStyleHook<
           if (options.deprecatedTokens) {
             const { deprecatedTokens } = options;
             deprecatedTokens.forEach(([oldTokenKey, newTokenKey]) => {
-              // if (process.env.NODE_ENV !== 'production') {
-              //   warning(
-              //     !customComponentToken?.[oldTokenKey],
-              //     `The token '${String(oldTokenKey)}' of ${component} had deprecated, use '${String(
-              //       newTokenKey,
-              //     )}' instead.`,
-              //   );
-              // }
+              if (process.env.NODE_ENV !== 'production') {
+                warning(
+                  !customComponentToken?.[oldTokenKey],
+                  `The token '${String(oldTokenKey)}' of ${component} had deprecated, use '${String(
+                    newTokenKey,
+                  )}' instead.`,
+                );
+              }
 
               // Should wrap with `if` clause, or there will be `undefined` in object.
               if (
@@ -245,11 +245,11 @@ export const genSubStyleComponent: <ComponentName extends OverrideComponent>(
     return null;
   };
 
-  // if (process.env.NODE_ENV !== 'production') {
-  //   StyledComponent.displayName = `SubStyle_${
-  //     Array.isArray(componentName) ? componentName.join('.') : componentName
-  //   }`;
-  // }
+  if (process.env.NODE_ENV !== 'production') {
+    StyledComponent.displayName = `SubStyle_${
+      Array.isArray(componentName) ? componentName.join('.') : componentName
+    }`;
+  }
 
   return StyledComponent;
 };

@@ -9,7 +9,7 @@ import omit from 'rc-util/lib/omit';
 
 import initCollapseMotion from '../_util/motion';
 import { cloneElement, isValidElement } from '../_util/reactNode';
-// import { devUseWarning } from '../_util/warning';
+import { devUseWarning } from '../_util/warning';
 import { ConfigContext } from '../config-provider';
 import type { SiderContextProps } from '../layout/Sider';
 import type { ItemType } from './hooks/useItems';
@@ -71,23 +71,23 @@ const InternalMenu = forwardRef<RcMenuRef, InternalMenuProps>((props, ref) => {
   const mergedChildren = useItems(items) || children;
 
   // ======================== Warning ==========================
-  // if (process.env.NODE_ENV !== 'production') {
-  //   const warning = devUseWarning('Menu');
+  if (process.env.NODE_ENV !== 'production') {
+    const warning = devUseWarning('Menu');
 
-  //   warning(
-  //     !('inlineCollapsed' in props && mode !== 'inline'),
-  //     'usage',
-  //     '`inlineCollapsed` should only be used when `mode` is inline.',
-  //   );
+    warning(
+      !('inlineCollapsed' in props && mode !== 'inline'),
+      'usage',
+      '`inlineCollapsed` should only be used when `mode` is inline.',
+    );
 
-  //   warning(
-  //     !(props.siderCollapsed !== undefined && 'inlineCollapsed' in props),
-  //     'usage',
-  //     '`inlineCollapsed` not control Menu under Sider. Should set `collapsed` on Sider instead.',
-  //   );
+    warning(
+      !(props.siderCollapsed !== undefined && 'inlineCollapsed' in props),
+      'usage',
+      '`inlineCollapsed` not control Menu under Sider. Should set `collapsed` on Sider instead.',
+    );
 
-  //   warning.deprecated('items' in props && !children, 'children', 'items');
-  // }
+    warning.deprecated('items' in props && !children, 'children', 'items');
+  }
 
   overrideObj.validator?.({ mode });
 

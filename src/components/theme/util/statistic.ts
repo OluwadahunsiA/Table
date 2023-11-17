@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 declare const CSSINJS_STATISTIC: any;
 
-const enableStatistic = typeof CSSINJS_STATISTIC !== 'undefined';
-  // process.env.NODE_ENV !== 'production' || typeof CSSINJS_STATISTIC !== 'undefined';
+const enableStatistic =
+  process.env.NODE_ENV !== 'production' ||
+  typeof CSSINJS_STATISTIC !== 'undefined';
+
 let recording = true;
 
 /**
@@ -52,8 +54,10 @@ function noop() {}
 export default function statisticToken<T extends object>(token: T) {
   let tokenKeys: Set<string> | undefined;
   let proxy = token;
-  let flush: (componentName: string, componentToken: Record<string, string | number>) => void =
-    noop;
+  let flush: (
+    componentName: string,
+    componentToken: Record<string, string | number>
+  ) => void = noop;
 
   if (enableStatistic && typeof Proxy !== 'undefined') {
     tokenKeys = new Set<string>();

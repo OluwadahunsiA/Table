@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import RcCheckbox from 'rc-checkbox';
 import { composeRef } from 'rc-util/lib/ref';
 
-// import { devUseWarning } from '../_util/warning';
+import { devUseWarning } from '../_util/warning';
 import Wave from '../_util/wave';
 import { TARGET_CLS } from '../_util/wave/interface';
 import { ConfigContext } from '../config-provider';
@@ -25,11 +25,11 @@ const InternalRadio: React.ForwardRefRenderFunction<RadioRef, RadioProps> = (
   const mergedRef = composeRef(ref, innerRef);
   const { isFormItemInput } = React.useContext(FormItemInputContext);
 
-  // if (process.env.NODE_ENV !== 'production') {
-  //   const warning = devUseWarning('Radio');
+  if (process.env.NODE_ENV !== 'production') {
+    const warning = devUseWarning('Radio');
 
-  //   warning(!('optionType' in props), 'usage', '`optionType` is only support in Radio.Group.');
-  // }
+    warning(!('optionType' in props), 'usage', '`optionType` is only support in Radio.Group.');
+  }
 
   const onChange = (e: RadioChangeEvent) => {
     props.onChange?.(e);
@@ -106,8 +106,8 @@ const InternalRadio: React.ForwardRefRenderFunction<RadioRef, RadioProps> = (
 
 const Radio = React.forwardRef<RadioRef, RadioProps>(InternalRadio);
 
-// if (process.env.NODE_ENV !== 'production') {
-//   Radio.displayName = 'Radio';
-// }
+if (process.env.NODE_ENV !== 'production') {
+  Radio.displayName = 'Radio';
+}
 
 export default Radio;

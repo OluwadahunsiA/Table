@@ -61,8 +61,8 @@ const Ribbon: React.FC<RibbonProps> = (props) => {
   );
 };
 
-// if (process.env.NODE_ENV !== 'production') {
-//   Ribbon.displayName = 'Ribbon';
-// }
+if (process.env.NODE_ENV !== 'production') {
+  Ribbon.displayName = 'Ribbon';
+}
 
 export default Ribbon;

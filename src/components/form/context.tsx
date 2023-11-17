@@ -68,9 +68,9 @@ export interface FormItemStatusContextProps {
 
 export const FormItemInputContext = React.createContext<FormItemStatusContextProps>({});
 
-// if (process.env.NODE_ENV !== 'production') {
-//   FormItemInputContext.displayName = 'FormItemInputContext';
-// }
+if (process.env.NODE_ENV !== 'production') {
+  FormItemInputContext.displayName = 'FormItemInputContext';
+}
 
 export type NoFormStyleProps = PropsWithChildren<{
   status?: boolean;

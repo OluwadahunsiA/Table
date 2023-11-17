@@ -175,8 +175,8 @@ const Search = React.forwardRef<InputRef, SearchProps>((props, ref) => {
     />
   );
 });
-// if (process.env.NODE_ENV !== 'production') {
-//   Search.displayName = 'Search';
-// }
+if (process.env.NODE_ENV !== 'production') {
+  Search.displayName = 'Search';
+}
 
 export default Search;

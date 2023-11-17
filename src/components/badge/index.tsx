@@ -276,8 +276,8 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(InternalBadge) as Co
 
 Badge.Ribbon = Ribbon;
 
-// if (process.env.NODE_ENV !== 'production') {
-//   Badge.displayName = 'Badge';
-// }
+if (process.env.NODE_ENV !== 'production') {
+  Badge.displayName = 'Badge';
+}
 
 export default Badge;

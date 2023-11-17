@@ -20,6 +20,7 @@ import type { FormLabelAlign } from './interface';
 import useStyle from './style';
 import ValidateMessagesContext from './validateMessagesContext';
 import type { FeedbackIcons } from './FormItem';
+import useFormWarning from './hooks/useFormWarning';
 
 export type RequiredMark =
   | boolean
@@ -78,10 +79,10 @@ const InternalForm: React.ForwardRefRenderFunction<FormInstance, FormProps> = (p
 
   const contextValidateMessages = React.useContext(ValidateMessagesContext);
 
-  // if (process.env.NODE_ENV !== 'production') {
-  //   // eslint-disable-next-line react-hooks/rules-of-hooks
-  //   useFormWarning(props);
-  // }
+  if (process.env.NODE_ENV !== 'production') {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useFormWarning(props);
+  }
 
   const mergedRequiredMark = useMemo(() => {
     if (requiredMark !== undefined) {
@@ -208,9 +209,9 @@ const Form = React.forwardRef<FormInstance, FormProps>(InternalForm) as (<Values
   props: React.PropsWithChildren<FormProps<Values>> & { ref?: React.Ref<FormInstance<Values>> },
 ) => React.ReactElement) & { displayName?: string };
 
-// if (process.env.NODE_ENV !== 'production') {
-//   Form.displayName = 'Form';
-// }
+if (process.env.NODE_ENV !== 'production') {
+  Form.displayName = 'Form';
+}
 
 export { List, useForm, useWatch, type FormInstance };
 

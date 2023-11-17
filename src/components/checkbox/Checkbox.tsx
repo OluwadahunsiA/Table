@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import type { CheckboxRef } from 'rc-checkbox';
 import RcCheckbox from 'rc-checkbox';
 
-// import { devUseWarning } from '../_util/warning';
+import { devUseWarning } from '../_util/warning';
 import Wave from '../_util/wave';
 import { TARGET_CLS } from '../_util/wave/interface';
 import { ConfigContext } from '../config-provider';
@@ -80,15 +80,15 @@ const InternalCheckbox: React.ForwardRefRenderFunction<
 
   const prevValue = React.useRef(restProps.value);
 
-  // if (process.env.NODE_ENV !== 'production') {
-  //   const warning = devUseWarning('Checkbox');
+  if (process.env.NODE_ENV !== 'production') {
+    const warning = devUseWarning('Checkbox');
 
-  //   warning(
-  //     'checked' in restProps || !!checkboxGroup || !('value' in restProps),
-  //     'usage',
-  //     '`value` is not a valid prop, do you mean `checked`?',
-  //   );
-  // }
+    warning(
+      'checked' in restProps || !!checkboxGroup || !('value' in restProps),
+      'usage',
+      '`value` is not a valid prop, do you mean `checked`?',
+    );
+  }
 
   React.useEffect(() => {
     checkboxGroup?.registerValue(restProps.value);
@@ -168,8 +168,8 @@ const InternalCheckbox: React.ForwardRefRenderFunction<
 
 const Checkbox = React.forwardRef<CheckboxRef, CheckboxProps>(InternalCheckbox);
 
-// if (process.env.NODE_ENV !== 'production') {
-//   Checkbox.displayName = 'Checkbox';
-// }
+if (process.env.NODE_ENV !== 'production') {
+  Checkbox.displayName = 'Checkbox';
+}
 
 export default Checkbox;

@@ -282,8 +282,8 @@ const Tree = React.forwardRef<RcTree, TreeProps>((props, ref) => {
   );
 });
 
-// if (process.env.NODE_ENV !== 'production') {
-//   Tree.displayName = 'Tree';
-// }
+if (process.env.NODE_ENV !== 'production') {
+  Tree.displayName = 'Tree';
+}
 
 export default Tree;

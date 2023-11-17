@@ -7,7 +7,7 @@ import isEqual from 'rc-util/lib/isEqual';
 
 import type { FilterState } from '.';
 import useSyncState from '../../../_util/hooks/useSyncState';
-// import { devUseWarning } from '../../../_util/warning';
+import { devUseWarning } from '../../../_util/warning';
 import Button from '../../../button';
 import type { CheckboxChangeEvent } from '../../../checkbox';
 import Checkbox from '../../../checkbox';
@@ -185,24 +185,24 @@ function FilterDropdown<RecordType>(props: FilterDropdownProps<RecordType>) {
     onFilterDropdownVisibleChange?.(newVisible);
   };
 
-  // if (process.env.NODE_ENV !== 'production') {
-  //   const warning = devUseWarning('Table');
+  if (process.env.NODE_ENV !== 'production') {
+    const warning = devUseWarning('Table');
 
-  //   [
-  //     ['filterDropdownVisible', 'filterDropdownOpen', filterDropdownVisible],
-  //     [
-  //       'onFilterDropdownVisibleChange',
-  //       'onFilterDropdownOpenChange',
-  //       onFilterDropdownVisibleChange,
-  //     ],
-  //   ].forEach(([deprecatedName, newName, prop]) => {
-  //     warning.deprecated(
-  //       prop === undefined || prop === null,
-  //       deprecatedName as string,
-  //       newName as string,
-  //     );
-  //   });
-  // }
+    [
+      ['filterDropdownVisible', 'filterDropdownOpen', filterDropdownVisible],
+      [
+        'onFilterDropdownVisibleChange',
+        'onFilterDropdownOpenChange',
+        onFilterDropdownVisibleChange,
+      ],
+    ].forEach(([deprecatedName, newName, prop]) => {
+      warning.deprecated(
+        prop === undefined || prop === null,
+        deprecatedName as string,
+        newName as string,
+      );
+    });
+  }
 
   const mergedVisible = filterDropdownOpen ?? filterDropdownVisible ?? visible;
 

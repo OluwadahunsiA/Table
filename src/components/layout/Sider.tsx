@@ -214,8 +214,8 @@ const Sider = React.forwardRef<HTMLDivElement, SiderProps>((props, ref) => {
   return <SiderContext.Provider value={contextValue}>{renderSider()}</SiderContext.Provider>;
 });
 
-// if (process.env.NODE_ENV !== 'production') {
-//   Sider.displayName = 'Sider';
-// }
+if (process.env.NODE_ENV !== 'production') {
+  Sider.displayName = 'Sider';
+}
 
 export default Sider;

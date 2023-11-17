@@ -4,7 +4,7 @@ import omit from 'rc-util/lib/omit';
 import { debounce } from 'throttle-debounce';
 
 import { cloneElement, isValidElement } from '../_util/reactNode';
-// import { devUseWarning } from '../_util/warning';
+import { devUseWarning } from '../_util/warning';
 import type { ConfigConsumerProps } from '../config-provider';
 import { ConfigContext } from '../config-provider';
 import useStyle from './style/index';
@@ -115,11 +115,11 @@ const Spin: React.FC<SpinClassProps> = (props) => {
     [children, fullscreen],
   );
 
-  // if (process.env.NODE_ENV !== 'production') {
-  //   const warning = devUseWarning('Spin');
+  if (process.env.NODE_ENV !== 'production') {
+    const warning = devUseWarning('Spin');
 
-  //   warning(!tip || isNestedPattern, 'usage', '`tip` only work in nest pattern.');
-  // }
+    warning(!tip || isNestedPattern, 'usage', '`tip` only work in nest pattern.');
+  }
 
   const { direction, spin } = React.useContext<ConfigConsumerProps>(ConfigContext);
 
@@ -200,8 +200,8 @@ SpinFC.setDefaultIndicator = (indicator: React.ReactNode) => {
   defaultIndicator = indicator;
 };
 
-// if (process.env.NODE_ENV !== 'production') {
-//   SpinFC.displayName = 'Spin';
-// }
+if (process.env.NODE_ENV !== 'production') {
+  SpinFC.displayName = 'Spin';
+}
 
 export default SpinFC;
