@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { forwardRef, useContext, useEffect, useRef } from 'react';
 import CloseCircleFilled from '@ant-design/icons/CloseCircleFilled';
 import classNames from 'classnames';
@@ -115,20 +116,20 @@ const Input = forwardRef<InputRef, InputProps>((props, ref) => {
   const prevHasPrefixSuffix = useRef<boolean>(inputHasPrefixSuffix);
 
   /* eslint-disable react-hooks/rules-of-hooks */
-  if (process.env.NODE_ENV !== 'production') {
-    const warning = devUseWarning('Input');
+  // if (process.env.NODE_ENV !== 'production') {
+  //   const warning = devUseWarning('Input');
 
-    useEffect(() => {
-      if (inputHasPrefixSuffix && !prevHasPrefixSuffix.current) {
-        warning(
-          document.activeElement === inputRef.current?.input,
-          'usage',
-          `When Input is focused, dynamic add or remove prefix / suffix will make it lose focus caused by dom structure change. Read more: https://ant.design/components/input/#FAQ`,
-        );
-      }
-      prevHasPrefixSuffix.current = inputHasPrefixSuffix;
-    }, [inputHasPrefixSuffix]);
-  }
+  //   useEffect(() => {
+  //     if (inputHasPrefixSuffix && !prevHasPrefixSuffix.current) {
+  //       warning(
+  //         document.activeElement === inputRef.current?.input,
+  //         'usage',
+  //         `When Input is focused, dynamic add or remove prefix / suffix will make it lose focus caused by dom structure change. Read more: https://ant.design/components/input/#FAQ`,
+  //       );
+  //     }
+  //     prevHasPrefixSuffix.current = inputHasPrefixSuffix;
+  //   }, [inputHasPrefixSuffix]);
+  // }
   /* eslint-enable */
 
   // ===================== Remove Password value =====================

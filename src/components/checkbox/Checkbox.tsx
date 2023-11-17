@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import classNames from 'classnames';
 import type { CheckboxRef } from 'rc-checkbox';
 import RcCheckbox from 'rc-checkbox';
 
-import { devUseWarning } from '../_util/warning';
+// import { devUseWarning } from '../_util/warning';
 import Wave from '../_util/wave';
 import { TARGET_CLS } from '../_util/wave/interface';
 import { ConfigContext } from '../config-provider';
@@ -48,14 +49,15 @@ export interface CheckboxChangeEvent {
   nativeEvent: MouseEvent;
 }
 
-export interface CheckboxProps extends AbstractCheckboxProps<CheckboxChangeEvent> {
+export interface CheckboxProps
+  extends AbstractCheckboxProps<CheckboxChangeEvent> {
   indeterminate?: boolean;
 }
 
-const InternalCheckbox: React.ForwardRefRenderFunction<CheckboxRef, CheckboxProps> = (
-  props,
-  ref,
-) => {
+const InternalCheckbox: React.ForwardRefRenderFunction<
+  CheckboxRef,
+  CheckboxProps
+> = (props, ref) => {
   const {
     prefixCls: customizePrefixCls,
     className,
@@ -73,19 +75,20 @@ const InternalCheckbox: React.ForwardRefRenderFunction<CheckboxRef, CheckboxProp
   const checkboxGroup = React.useContext(GroupContext);
   const { isFormItemInput } = React.useContext(FormItemInputContext);
   const contextDisabled = React.useContext(DisabledContext);
-  const mergedDisabled = (checkboxGroup?.disabled || disabled) ?? contextDisabled;
+  const mergedDisabled =
+    (checkboxGroup?.disabled || disabled) ?? contextDisabled;
 
   const prevValue = React.useRef(restProps.value);
 
-  if (process.env.NODE_ENV !== 'production') {
-    const warning = devUseWarning('Checkbox');
+  // if (process.env.NODE_ENV !== 'production') {
+  //   const warning = devUseWarning('Checkbox');
 
-    warning(
-      'checked' in restProps || !!checkboxGroup || !('value' in restProps),
-      'usage',
-      '`value` is not a valid prop, do you mean `checked`?',
-    );
-  }
+  //   warning(
+  //     'checked' in restProps || !!checkboxGroup || !('value' in restProps),
+  //     'usage',
+  //     '`value` is not a valid prop, do you mean `checked`?',
+  //   );
+  // }
 
   React.useEffect(() => {
     checkboxGroup?.registerValue(restProps.value);
@@ -130,19 +133,19 @@ const InternalCheckbox: React.ForwardRefRenderFunction<CheckboxRef, CheckboxProp
     checkbox?.className,
     className,
     rootClassName,
-    hashId,
+    hashId
   );
   const checkboxClass = classNames(
     {
       [`${prefixCls}-indeterminate`]: indeterminate,
     },
     TARGET_CLS,
-    hashId,
+    hashId
   );
   const ariaChecked = indeterminate ? 'mixed' : undefined;
+
   return wrapSSR(
-    <Wave component="Checkbox" disabled={mergedDisabled}>
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+    <Wave component='Checkbox' disabled={mergedDisabled}>
       <label
         className={classString}
         style={{ ...checkbox?.style, ...style }}
@@ -159,14 +162,14 @@ const InternalCheckbox: React.ForwardRefRenderFunction<CheckboxRef, CheckboxProp
         />
         {children !== undefined && <span>{children}</span>}
       </label>
-    </Wave>,
+    </Wave>
   );
 };
 
 const Checkbox = React.forwardRef<CheckboxRef, CheckboxProps>(InternalCheckbox);
 
-if (process.env.NODE_ENV !== 'production') {
-  Checkbox.displayName = 'Checkbox';
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   Checkbox.displayName = 'Checkbox';
+// }
 
 export default Checkbox;

@@ -1,5 +1,7 @@
 import * as React from 'react';
-import rcWarning, { resetWarned as rcResetWarned } from 'rc-util/lib/warning';
+import
+rcWarning,
+{ resetWarned as rcResetWarned } from 'rc-util/lib/warning';
 
 export function noop() {}
 
@@ -12,7 +14,6 @@ export function resetWarned() {
 
 type Warning = (valid: boolean, component: string, message?: string) => void;
 
-// eslint-disable-next-line import/no-mutable-exports
 let warning: Warning = noop;
 if (process.env.NODE_ENV !== 'production') {
   warning = (valid, component, message) => {

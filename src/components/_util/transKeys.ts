@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const groupKeysMap = (keys: string[]) => {
   const map = new Map<string, number>();
   keys.forEach((key, index) => {

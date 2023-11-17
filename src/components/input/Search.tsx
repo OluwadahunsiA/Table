@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import SearchOutlined from '@ant-design/icons/SearchOutlined';
 import classNames from 'classnames';
 import { composeRef } from 'rc-util/lib/ref';
@@ -174,8 +175,8 @@ const Search = React.forwardRef<InputRef, SearchProps>((props, ref) => {
     />
   );
 });
-if (process.env.NODE_ENV !== 'production') {
-  Search.displayName = 'Search';
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   Search.displayName = 'Search';
+// }
 
 export default Search;

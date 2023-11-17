@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export, prefer-destructuring */
 
 import { generate } from '@ant-design/colors';
 import { TinyColor } from '@ctrl/tinycolor';

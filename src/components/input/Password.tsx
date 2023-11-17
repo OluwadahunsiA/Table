@@ -121,8 +121,8 @@ const Password = React.forwardRef<InputRef, PasswordProps>((props, ref) => {
   return <Input ref={composeRef(ref, inputRef)} {...omittedProps} />;
 });
 
-if (process.env.NODE_ENV !== 'production') {
-  Password.displayName = 'Password';
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   Password.displayName = 'Password';
+// }
 
 export default Password;

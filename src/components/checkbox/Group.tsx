@@ -132,7 +132,7 @@ const InternalGroup: React.ForwardRefRenderFunction<HTMLDivElement, CheckboxGrou
       ))
     : children;
 
-  // eslint-disable-next-line react/jsx-no-constructed-context-values
+  
   const context = {
     toggleOption,
     value,

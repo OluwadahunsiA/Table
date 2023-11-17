@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import * as React from 'react';
@@ -52,19 +53,27 @@ import useStyle from './style';
  * Since too many feedback using static method like `Modal.confirm` not getting theme, we record the
  * theme register info here to help developer get warning info.
  */
-let existThemeConfig = false;
+const existThemeConfig = false;
 
-export const warnContext: (componentName: string) => void =
-  process.env.NODE_ENV !== 'production'
-    ? (componentName: string) => {
-        warning(
-          !existThemeConfig,
-          componentName,
-          `Static function can not consume context like dynamic theme. Please use 'App' component instead.`,
-        );
-      }
-    : /* istanbul ignore next */
-      null!;
+export const warnContext: (componentName: string) => void = (
+  componentName: string
+) => {
+  warning(
+    !existThemeConfig,
+    componentName,
+    `Static function can not consume context like dynamic theme. Please use 'App' component instead.`
+  );
+};
+  // process.env.NODE_ENV !== 'production'
+  //   ? (componentName: string) => {
+  //       warning(
+  //         !existThemeConfig,
+  //         componentName,
+  //         `Static function can not consume context like dynamic theme. Please use 'App' component instead.`,
+  //       );
+  //     }
+  //   : /* istanbul ignore next */
+  //     null!;
 
 export {
   ConfigConsumer,
@@ -371,9 +380,9 @@ const ProviderChildren: React.FC<ProviderChildrenProps> = (props) => {
 
   const mergedTheme = useTheme(theme, parentContext.theme);
 
-  if (process.env.NODE_ENV !== 'production') {
-    existThemeConfig = existThemeConfig || !!mergedTheme;
-  }
+  // if (process.env.NODE_ENV !== 'production') {
+  //   existThemeConfig = existThemeConfig || !!mergedTheme;
+  // }
 
   const baseConfig = {
     csp,
@@ -623,8 +632,8 @@ Object.defineProperty(ConfigProvider, 'SizeContext', {
   },
 });
 
-if (process.env.NODE_ENV !== 'production') {
-  ConfigProvider.displayName = 'ConfigProvider';
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   ConfigProvider.displayName = 'ConfigProvider';
+// }
 
 export default ConfigProvider;

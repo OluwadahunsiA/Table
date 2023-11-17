@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames';
 
-import { devUseWarning } from '../_util/warning';
+// import { devUseWarning } from '../_util/warning';
 import { ConfigContext } from '../config-provider';
 import type { SizeType } from '../config-provider/SizeContext';
 import { useToken } from '../theme/internal';
@@ -38,11 +38,11 @@ const ButtonGroup: React.FC<ButtonGroupProps> = (props) => {
     // Do nothing
   }
 
-  if (process.env.NODE_ENV !== 'production') {
-    const warning = devUseWarning('Button.Group');
+  // if (process.env.NODE_ENV !== 'production') {
+  //   const warning = devUseWarning('Button.Group');
 
-    warning(!size || ['large', 'small', 'middle'].includes(size), 'usage', 'Invalid prop `size`.');
-  }
+  //   warning(!size || ['large', 'small', 'middle'].includes(size), 'usage', 'Invalid prop `size`.');
+  // }
 
   const classes = classNames(
     prefixCls,

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import raf from 'rc-util/lib/raf';
 
 function throttleByAnimationFrame<T extends any[]>(fn: (...args: T) => void) {

@@ -18,6 +18,8 @@ export function getPaginationParam(
 
   const paginationObj = pagination && typeof pagination === 'object' ? pagination : {};
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-expect-error
   Object.keys(paginationObj).forEach((pageProp: keyof typeof paginationObj) => {
     const value = mergedPagination[pageProp];
 

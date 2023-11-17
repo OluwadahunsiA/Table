@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import classNames from 'classnames';
 import CSSMotion from 'rc-motion';
 import { render, unmount } from 'rc-util/lib/React/render';

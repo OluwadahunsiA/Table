@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { PresetColorKey } from '../theme/interface';
 import { PresetColors } from '../theme/interface';
 

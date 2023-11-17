@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Proxy the dom ref with `{ nativeElement, otherFn }` type
 // ref: https://github.com/ant-design/ant-design/discussions/45242
 

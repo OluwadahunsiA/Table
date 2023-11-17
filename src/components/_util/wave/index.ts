@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import classNames from 'classnames';
 import { composeRef, supportRef } from 'rc-util/lib/ref';
 import isVisible from 'rc-util/lib/Dom/isVisible';

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unnecessary-type-constraint */
 import * as React from 'react';
 
 import { devUseWarning } from '../../../_util/warning';

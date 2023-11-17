@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ItemGroup } from 'rc-menu';
 import type {
   MenuDividerType as RcMenuDividerType,

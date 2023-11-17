@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 import { cloneElement, isFragment } from '../_util/reactNode';
 import type { BaseButtonProps, LegacyButtonType } from './button';

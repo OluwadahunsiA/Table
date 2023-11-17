@@ -61,8 +61,8 @@ Menu.SubMenu = SubMenu;
 Menu.Divider = MenuDivider;
 Menu.ItemGroup = ItemGroup;
 
-if (process.env.NODE_ENV !== 'production') {
-  Menu.displayName = 'Menu';
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   Menu.displayName = 'Menu';
+// }
 
 export default Menu;

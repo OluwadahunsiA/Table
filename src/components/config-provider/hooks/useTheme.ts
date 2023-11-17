@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import useMemo from 'rc-util/lib/hooks/useMemo';
 import isEqual from 'rc-util/lib/isEqual';
 import type { OverrideToken } from '../../theme/interface';
@@ -22,6 +24,7 @@ export default function useTheme(
       const mergedComponents = {
         ...parentThemeConfig.components,
       };
+      //@ts-expect-error
 
       Object.keys(theme.components || {}).forEach((componentName: keyof OverrideToken) => {
         mergedComponents[componentName] = {

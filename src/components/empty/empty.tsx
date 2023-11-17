@@ -59,8 +59,8 @@ const Empty: React.FC = () => {
   );
 };
 
-if (process.env.NODE_ENV !== 'production') {
-  Empty.displayName = 'EmptyImage';
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   Empty.displayName = 'EmptyImage';
+// }
 
 export default Empty;

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 type RecordType = Record<string, any>;
 
 function extendsObject<T extends RecordType>(...list: T[]) {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import * as React from 'react';
 import RightOutlined from '@ant-design/icons/RightOutlined';
 import type { AlignType } from '@rc-component/trigger';
@@ -115,16 +116,16 @@ const Dropdown: CompoundedComponent = (props) => {
   // Warning for deprecated usage
   const warning = devUseWarning('Dropdown');
 
-  if (process.env.NODE_ENV !== 'production') {
-    [
-      ['visible', 'open'],
-      ['onVisibleChange', 'onOpenChange'],
-    ].forEach(([deprecatedName, newName]) => {
-      warning.deprecated(!(deprecatedName in props), deprecatedName, newName);
-    });
+  // if (process.env.NODE_ENV !== 'production') {
+  //   [
+  //     ['visible', 'open'],
+  //     ['onVisibleChange', 'onOpenChange'],
+  //   ].forEach(([deprecatedName, newName]) => {
+  //     warning.deprecated(!(deprecatedName in props), deprecatedName, newName);
+  //   });
 
-    warning.deprecated(!('overlay' in props), 'overlay', 'menu');
-  }
+  //   warning.deprecated(!('overlay' in props), 'overlay', 'menu');
+  // }
 
   const memoTransitionName = React.useMemo<string>(() => {
     const rootPrefixCls = getPrefixCls();
@@ -150,23 +151,23 @@ const Dropdown: CompoundedComponent = (props) => {
     return placement as DropdownPlacement;
   }, [placement, direction]);
 
-  if (process.env.NODE_ENV !== 'production') {
-    if (placement.includes('Center')) {
-      const newPlacement = placement.slice(0, placement.indexOf('Center')) as DropdownPlacement;
-      warning(
-        !placement.includes('Center'),
-        'deprecated',
-        `You are using '${placement}' placement in Dropdown, which is deprecated. Try to use '${newPlacement}' instead.`,
-      );
-    }
+  // if (process.env.NODE_ENV !== 'production') {
+  //   if (placement.includes('Center')) {
+  //     const newPlacement = placement.slice(0, placement.indexOf('Center')) as DropdownPlacement;
+  //     warning(
+  //       !placement.includes('Center'),
+  //       'deprecated',
+  //       `You are using '${placement}' placement in Dropdown, which is deprecated. Try to use '${newPlacement}' instead.`,
+  //     );
+  //   }
 
-    [
-      ['visible', 'open'],
-      ['onVisibleChange', 'onOpenChange'],
-    ].forEach(([deprecatedName, newName]) => {
-      warning.deprecated(!(deprecatedName in props), deprecatedName, newName);
-    });
-  }
+  //   [
+  //     ['visible', 'open'],
+  //     ['onVisibleChange', 'onOpenChange'],
+  //   ].forEach(([deprecatedName, newName]) => {
+  //     warning.deprecated(!(deprecatedName in props), deprecatedName, newName);
+  //   });
+  // }
 
   const prefixCls = getPrefixCls('dropdown', customizePrefixCls);
   const [wrapSSR, hashId] = useStyle(prefixCls);
@@ -332,8 +333,8 @@ const WrapPurePanel: React.FC<DropdownProps> = (props) => (
 
 Dropdown._InternalPanelDoNotUseOrYouWillBeFired = WrapPurePanel;
 
-if (process.env.NODE_ENV !== 'production') {
-  Dropdown.displayName = 'Dropdown';
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   Dropdown.displayName = 'Dropdown';
+// }
 
 export default Dropdown;

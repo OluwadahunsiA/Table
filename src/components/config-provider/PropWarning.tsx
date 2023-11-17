@@ -22,8 +22,10 @@ const PropWarning = React.memo(({ dropdownMatchSelectWidth }: PropWarningProps) 
   return null;
 });
 
-if (process.env.NODE_ENV !== 'production') {
-  PropWarning.displayName = 'PropWarning';
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   PropWarning.displayName = 'PropWarning';
+// }
 
-export default process.env.NODE_ENV !== 'production' ? PropWarning : () => null;
+
+export default PropWarning;
+// export default process.env.NODE_ENV !== 'production' ? PropWarning : () => null;

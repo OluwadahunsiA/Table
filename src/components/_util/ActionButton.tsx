@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/ban-types */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import useState from 'rc-util/lib/hooks/useState';
 import * as React from 'react';
 import Button from '../button';
@@ -21,7 +23,7 @@ export interface ActionButtonProps {
   isSilent?: () => boolean;
 }
 
-function isThenable<T extends any>(thing?: PromiseLike<T>): boolean {
+function isThenable<T>(thing?: PromiseLike<T>): boolean {
   return !!(thing && thing.then);
 }
 
@@ -83,11 +85,13 @@ const ActionButton: React.FC<ActionButtonProps> = (props) => {
         }
 
         return Promise.reject(e);
-      },
+      }
     );
   };
 
-  const onClick = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
+  const onClick = (
+    e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>
+  ) => {
     if (clickedRef.current) {
       return;
     }

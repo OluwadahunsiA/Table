@@ -1,4 +1,5 @@
-/* eslint-disable react/button-has-type */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import React, {
   Children,
   createRef,
@@ -12,7 +13,7 @@ import classNames from 'classnames';
 import omit from 'rc-util/lib/omit';
 import { composeRef } from 'rc-util/lib/ref';
 
-import { devUseWarning } from '../_util/warning';
+// import { devUseWarning } from '../_util/warning';
 import Wave from '../_util/wave';
 import { ConfigContext } from '../config-provider';
 import DisabledContext from '../config-provider/DisabledContext';
@@ -183,21 +184,21 @@ const InternalButton: React.ForwardRefRenderFunction<
     (onClick as React.MouseEventHandler<HTMLButtonElement | HTMLAnchorElement>)?.(e);
   };
 
-  if (process.env.NODE_ENV !== 'production') {
-    const warning = devUseWarning('Button');
+  // if (process.env.NODE_ENV !== 'production') {
+  //   const warning = devUseWarning('Button');
 
-    warning(
-      !(typeof icon === 'string' && icon.length > 2),
-      'breaking',
-      `\`icon\` is using ReactNode instead of string naming in v4. Please check \`${icon}\` at https://ant.design/components/icon`,
-    );
+  //   warning(
+  //     !(typeof icon === 'string' && icon.length > 2),
+  //     'breaking',
+  //     `\`icon\` is using ReactNode instead of string naming in v4. Please check \`${icon}\` at https://ant.design/components/icon`,
+  //   );
 
-    warning(
-      !(ghost && isUnBorderedButtonType(type)),
-      'usage',
-      "`link` or `text` button can't be a `ghost` button.",
-    );
-  }
+  //   warning(
+  //     !(ghost && isUnBorderedButtonType(type)),
+  //     'usage',
+  //     "`link` or `text` button can't be a `ghost` button.",
+  //   );
+  // }
 
   const autoInsertSpace = autoInsertSpaceInButton !== false;
   const { compactSize, compactItemClassnames } = useCompactItemContext(prefixCls, direction);
@@ -304,9 +305,9 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
   InternalButton,
 ) as CompoundedComponent;
 
-if (process.env.NODE_ENV !== 'production') {
-  Button.displayName = 'Button';
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   Button.displayName = 'Button';
+// }
 
 Button.Group = Group;
 Button.__ANT_BUTTON = true;

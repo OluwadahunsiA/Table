@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { CSSObject } from '@ant-design/cssinjs';
 
 import type { FullToken, GenerateStyle } from '../../theme/internal';
@@ -87,7 +88,10 @@ const genGridColStyle: GenerateStyle<GridColToken> = (token): CSSObject => {
   };
 };
 
-const genLoopGridColumnsStyle = (token: GridColToken, sizeCls: string): CSSObject => {
+const genLoopGridColumnsStyle = (
+  token: GridColToken,
+  sizeCls: string
+): CSSObject => {
   const { componentCls, gridColumns } = token;
 
   const gridColumnsStyle: CSSObject = {};
@@ -154,7 +158,7 @@ const genGridStyle = (token: GridColToken, sizeCls: string): CSSObject =>
 const genGridMediaStyle = (
   token: GridColToken,
   screenSize: number,
-  sizeCls: string,
+  sizeCls: string
 ): CSSObject => ({
   [`@media (min-width: ${screenSize}px)`]: {
     ...genGridStyle(token, sizeCls),
@@ -162,7 +166,9 @@ const genGridMediaStyle = (
 });
 
 // ============================== Export ==============================
-export const useRowStyle = genComponentStyleHook('Grid', (token) => [genGridRowStyle(token)]);
+export const useRowStyle = genComponentStyleHook('Grid', (token) => [
+  genGridRowStyle(token),
+]);
 
 export const useColStyle = genComponentStyleHook('Grid', (token) => {
   const gridToken: GridColToken = mergeToken<GridColToken>(token, {
@@ -182,8 +188,9 @@ export const useColStyle = genComponentStyleHook('Grid', (token) => {
     genGridStyle(gridToken, ''),
     genGridStyle(gridToken, '-xs'),
     Object.keys(gridMediaSizesMap)
+      //@ts-expect-error
       .map((key: keyof typeof gridMediaSizesMap) =>
-        genGridMediaStyle(gridToken, gridMediaSizesMap[key], key),
+        genGridMediaStyle(gridToken, gridMediaSizesMap[key], key)
       )
       .reduce((pre, cur) => ({ ...pre, ...cur }), {}),
   ];
