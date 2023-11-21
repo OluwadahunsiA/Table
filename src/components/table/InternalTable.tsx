@@ -126,7 +126,7 @@ export interface TableProps<RecordType>
 
 const InternalTable = <RecordType extends AnyObject = AnyObject>(
   props: InternalTableProps<RecordType>,
-  ref:any
+  ref: any
   // ref: React.MutableRefObject<HTMLDivElement>
 ) => {
   const {
@@ -166,7 +166,7 @@ const InternalTable = <RecordType extends AnyObject = AnyObject>(
     warning(
       !(typeof rowKey === 'function' && rowKey.length > 1),
       'usage',
-      '`index` parameter of `rowKey` function is deprecated. There is no guarantee that it will work as expected.',
+      '`index` parameter of `rowKey` function is deprecated. There is no guarantee that it will work as expected.'
     );
   }
 

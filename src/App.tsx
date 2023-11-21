@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from 'react';
 import qs from 'qs';
-// import { Table } from 'antd';
-// import type { ColumnsType, TablePaginationConfig } from 'antd/es/table';
-// import type { FilterValue, SorterResult } from 'antd/es/table/interface';
-// import Table from './Table/Table';
 import Table from './components/table';
 
 interface DataType {
@@ -108,7 +104,7 @@ const App: React.FC = () => {
   return (
     <Table
       columns={columns}
-      rowKey={(record: any) => record.login.uuid}
+      // rowKey={(record: any) => record.login.uuid}
       dataSource={data}
       pagination={tableParams.pagination}
       loading={loading}
